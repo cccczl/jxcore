@@ -2196,6 +2196,12 @@ void SetupProcessObject(const int threadId) {
   JS_NAME_SET(process, JS_STRING_ID("isEmbedded"), STD_TO_BOOLEAN(false));
 #endif
 
+#if defined(_WIN32)
+  JS_NAME_SET(process, JS_STRING_ID("isWinGui"), STD_TO_BOOLEAN(!uv_guess_handle(1)));
+#else
+  JS_NAME_SET(process, JS_STRING_ID("isWinGui"), STD_TO_BOOLEAN(false));
+#endif
+
   JS_NAME_SET(process, JS_STRING_ID("isPackaged"),
               STD_TO_BOOLEAN(com->is_packaged_));
 
