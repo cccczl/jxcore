@@ -2197,7 +2197,8 @@ void SetupProcessObject(const int threadId) {
 #endif
 
 #if defined(_WIN32)
-  JS_NAME_SET(process, JS_STRING_ID("isWinGui"), STD_TO_BOOLEAN(!uv_guess_handle(1)));
+  JS_NAME_SET(process, JS_STRING_ID("isWinGui"),
+	  STD_TO_BOOLEAN(uv_guess_handle(1) == UV_UNKNOWN_HANDLE));
 #else
   JS_NAME_SET(process, JS_STRING_ID("isWinGui"), STD_TO_BOOLEAN(false));
 #endif
