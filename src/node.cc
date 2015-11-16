@@ -2197,8 +2197,10 @@ void SetupProcessObject(const int threadId) {
 #endif
 
 #if defined(_WIN32)
+  // Windows GUI applications do not have stdout & stderr, so guessing
+  // the type of file handle fails.
   JS_NAME_SET(process, JS_STRING_ID("isWinGui"),
-	  STD_TO_BOOLEAN(uv_guess_handle(1) == UV_UNKNOWN_HANDLE));
+              STD_TO_BOOLEAN(uv_guess_handle(1) == UV_UNKNOWN_HANDLE));
 #else
   JS_NAME_SET(process, JS_STRING_ID("isWinGui"), STD_TO_BOOLEAN(false));
 #endif
